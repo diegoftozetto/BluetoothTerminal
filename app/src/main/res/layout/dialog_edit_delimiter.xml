@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/_16dp"
+    android:paddingRight="@dimen/_16dp"
+    android:paddingTop="@dimen/_16dp">
+
+    <TextView
+        android:id="@+id/tv_delimiter_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delimiter_send" />
+
+    <EditText
+        android:id="@+id/et_delimiter_send"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_55dp"
+        android:ems="10"
+        android:inputType="text"
+        android:backgroundTint="@color/teal_700"
+        android:maxLength="1"
+        android:hint="@string/hint_type_delimiter"/>
+
+    <TextView
+        android:id="@+id/tv_delimiter_receive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delimiter_receive" />
+
+    <EditText
+        android:id="@+id/et_delimiter_receive"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_55dp"
+        android:ems="10"
+        android:backgroundTint="@color/teal_700"
+        android:maxLength="1"
+        android:inputType="text" />
+
+</LinearLayout>

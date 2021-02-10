@@ -1,0 +1,73 @@
+<resources>
+    <!-- App -->
+    <string name="app_name" translatable="false">Chrono Pass</string>
+    <string name="app_version">Version 1.0</string>
+    <string name="app_description">Description</string>
+    <string name="app_description_about">Bluetooth communication application with embedded technology device.</string>
+    <!-- Navigation Drawer -->
+    <string name="title_activity_navigation_drawer" translatable="false">NavigationDrawerActivity</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="menu_scan_devices">Paired Devices</string>
+    <string name="menu_commands">Commands</string>
+    <string name="menu_settings">Settings</string>
+    <!-- Main -->
+    <string name="tv_without_permission">Chrono Pass Without Permission…</string>
+    <!-- Scan -->
+    <string name="title_activity_scan_device">Paired Devices</string>
+    <string name="sb_scan_devices">"Scanning devices…"</string>
+    <string name="tv_no_paired_devices">No Paired Devices…</string>
+    <string name="menu_scan_unpaired_devices">Scan Unpaired Devices</string>
+    <string name="tv_unpaired_devices">No Devices Found…</string>
+    <string name="toast_pairing">Pairing…</string>
+    <string name="toast_paired">Paired Device…</string>
+    <string name="tv_unnamed">Unnamed</string>
+    <string name="toast_scanning_finished">Scanning finished!</string>
+    <string name="alert_dialog_title_scan_device">Unpaired Devices</string>
+    <!-- Commands -->
+    <string name="tv_no_command_configured">No Command Configured…</string>
+    <string name="menu_new_command">New Command</string>
+    <string name="hint_type_command_name">Command Name</string>
+    <string name="hint_type_command">Command Value</string>
+    <string name="toast_command_added_successfully">Command added successfully!!!</string>
+    <string name="toast_command_updated_successfully">Command updated successfully!!!</string>
+    <string name="toast_error_adding_command_configuration">Error when adding command configuration.</string>
+    <string name="toast_type_fields_correctly">Please. Type the fields correctly.</string>
+    <string name="toast_command_removed_successfully">Command removed successfully!</string>
+    <string name="alert_dialog_title_new_command">New Command</string>
+    <string name="alert_dialog_title_update_command">Update Command</string>
+    <string name="alert_dialog_title_choose_option">Choose option</string>
+    <string name="choose_option_edit">Edit</string>
+    <string name="choose_option_delete">Delete</string>
+    <string name="toast_selected_color">The color will be added in sequence to the typed command (Ex: Typed Command, Color).</string>
+    <string name="cb_add_color">Add Cor</string>
+    <!-- Settings -->
+    <string name="hint_type_delimiter">Delimiter Character</string>
+    <string name="toast_delimiter_added_successfully">Delimiter added successfully!!!</string>
+    <string name="toast_type_field_correctly">Please. Type the field correctly.</string>
+    <string name="alert_dialog_title_configure_delimiter">Configure Delimiter</string>
+    <string name="settings_delimiter">Delimiter</string>
+    <string name="settings_delimiter_description">Set delimiter character at the end of the message.</string>
+    <string name="settings_about">About</string>
+    <string name="settings_about_description">Everything about the Chrono Pass Bluetooth Terminal…</string>
+    <string name="delimiter_send">Delimiter (Send)</string>
+    <string name="delimiter_receive">Delimiter (Receive)</string>
+    <string name="link_web_freepik"><div>Chrono Pass uses icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></string>
+
+    <!-- Terminal -->
+    <string name="title_terminal">Terminal</string>
+    <string name="tv_messages_connecting">Connecting…</string>
+    <string name="tv_messages_connected">Connected With:</string>
+    <string name="tv_messages_command_received">Command Received:</string>
+    <string name="tv_messages_disconnected">Device Disconnected!</string>
+    <string name="tv_messages_no_connected">Could not connect, next try in 3 sec…</string>
+    <string name="sp_item_terminal">Manual Control</string>
+    <string name="title_activity_terminal" translatable="false">Terminal</string>
+    <string name="menu_connect">Device Connect</string>
+    <!-- Others -->
+    <string name="positive_button_save">Save</string>
+    <string name="positive_button_update">Update</string>
+    <string name="negative_button_cancel">Cancel</string>
+    <string name="tv_dot_predefine" translatable="false">•</string>
+</resources>

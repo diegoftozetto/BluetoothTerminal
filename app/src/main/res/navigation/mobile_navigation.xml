@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.chronopassbluetoothterminal.view.ui.ScanDevicesFragment"
+        android:label="@string/menu_scan_devices"
+        tools:layout="@layout/fragment_scan_devices" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.chronopassbluetoothterminal.view.ui.CommandsFragment"
+        android:label="@string/menu_commands"
+        tools:layout="@layout/fragment_commands" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.chronopassbluetoothterminal.view.ui.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+</navigation>
