@@ -7,13 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.chronopassbluetoothterminal.model.Command;
+import com.example.chronopassbluetoothterminal.model.Terminal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "chrono_pass_db";
 
     public DatabaseHelper(Context context) {
@@ -23,15 +24,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(Command.CREATE_TABLE);
+        db.execSQL(Terminal.CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + Command.TABLE_NAME);
-
-        onCreate(db);
+        if (oldVersion == 1) {
+            db.execSQL(Terminal.CREATE_TABLE);
+        } else {
+            onCreate(db);
+        }
     }
 
+    /**
+     * TB_COMMAND
+     */
     public long insertConfiguration(String name, String value, int color) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -128,6 +135,58 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(Command.TABLE_NAME, Command.COLUMN_ID + " = ?",
                 new String[]{String.valueOf(config.getId())});
+        db.close();
+    }
+
+    /**
+     * TB_TERMINAL
+     */
+    public long insertTerminal(String deviceAddress, String timestamp, String text, int type) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(Terminal.COLUMN_DEVICE_ADDRESS, deviceAddress);
+        values.put(Terminal.COLUMN_TIMESTAMP, timestamp);
+        values.put(Terminal.COLUMN_TEXT, text);
+        values.put(Terminal.COLUMN_TYPE, type);
+
+        long id = db.insert(Terminal.TABLE_NAME, null, values);
+        db.close();
+
+        return id;
+    }
+
+    public List<Terminal> getAllTextTerminalDeviceAddress(String deviceAddress) {
+        List<Terminal> configurations = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + Terminal.TABLE_NAME + " WHERE " +
+                Terminal.COLUMN_DEVICE_ADDRESS + "= '" + deviceAddress + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Terminal config = new Terminal();
+                config.setId(cursor.getInt(cursor.getColumnIndex(Terminal.COLUMN_ID)));
+                config.setDeviceAddress(cursor.getString(cursor.getColumnIndex(Terminal.COLUMN_DEVICE_ADDRESS)));
+                config.setTimestamp(cursor.getString(cursor.getColumnIndex(Terminal.COLUMN_TIMESTAMP)));
+                config.setText(cursor.getString(cursor.getColumnIndex(Terminal.COLUMN_TEXT)));
+                config.setType(cursor.getInt(cursor.getColumnIndex(Terminal.COLUMN_TYPE)));
+
+                configurations.add(config);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        return configurations;
+    }
+
+    public void deleteTextTerminal(String deviceAddress) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(Terminal.TABLE_NAME, Terminal.COLUMN_DEVICE_ADDRESS + " = ?",
+                new String[]{deviceAddress});
         db.close();
     }
 }
