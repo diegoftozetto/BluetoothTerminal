@@ -9,5 +9,9 @@ public class AppConstant {
     public static final String KEY_SEPARATOR_DEFAULT = ",";
     public static final String EXTRA_TERMINAL_DEVICE = "device";
 
+    public static final String SYMBOL_TERMINAL_SYSTEM = "$";
+    public static final String SYMBOL_TERMINAL_SEND = ">";
+    public static final String SYMBOL_TERMINAL_RECEIVE = "<";
+
     public static String CURRENT_DELIMITER_RECEIVE = null;
 }

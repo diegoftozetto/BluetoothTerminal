@@ -20,6 +20,7 @@
     <string name="toast_paired">Pareado Dispositivo…</string>
     <string name="tv_unnamed">Sem Nome</string>
     <string name="toast_scanning_finished">Escaneamento Finalizado!</string>
+    <string name="alert_dialog_title_scan_device">Dispositivos Disponíveis</string>
     <!-- Commands -->
     <string name="tv_no_command_configured">Nenhum Comando Configurado…</string>
     <string name="menu_new_command">Novo Comando</string>
@@ -35,6 +36,8 @@
     <string name="alert_dialog_title_choose_option">Escolha a opção</string>
     <string name="choose_option_edit">Editar</string>
     <string name="choose_option_delete">Deletar</string>
+    <string name="toast_selected_color">A cor será adicionada em sequência ao comando digitado (Ex: Comando Digitado,Cor).</string>
+    <string name="cb_add_color">Adicionar Cor</string>
     <!-- Settings -->
     <string name="hint_type_delimiter">Caractere Delimitador</string>
     <string name="toast_delimiter_added_successfully">Delimitador adicionado com sucesso!!!</string>
@@ -43,9 +46,10 @@
     <string name="settings_delimiter">Delimitador</string>
     <string name="settings_delimiter_description">Configurar caractere delimitador do fim da mensagem.</string>
     <string name="settings_about">Sobre</string>
-    <string name="settings_about_description">Tudo sobre o Chrono Pass Bluetooth Terminal.</string>
+    <string name="settings_about_description">Tudo sobre o Chrono Pass.</string>
     <string name="delimiter_send">Delimitador (Envio)</string>
     <string name="delimiter_receive">Delimitador (Recebimento)</string>
+    <string name="link_web_freepik"><div>Chrono Pass utiliza icones feitos por <a href="https://www.freepik.com" title="Freepik">Freepik</a> a partir de <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></string>
     <!-- Terminal -->
     <string name="title_terminal">Terminal</string>
     <string name="sp_item_terminal">Comando Manual</string>
@@ -55,12 +59,9 @@
     <string name="tv_messages_no_connected">Não foi possível conectar, próxima tentativa em 3 segundos…</string>
     <string name="tv_messages_command_received">Comando Recebido:</string>
     <string name="menu_connect">Conectar Dispositivo</string>
+    <string name="menu_delete">Limpar Terminal</string>
     <!-- Others -->
     <string name="positive_button_save">Salvar</string>
     <string name="positive_button_update">Atualizar</string>
     <string name="negative_button_cancel">Cancelar</string>
-    <string name="alert_dialog_title_scan_device">Dispositivos Disponíveis</string>
-    <string name="toast_selected_color">A cor será adicionada em sequência ao comando digitado (Ex: Comando Digitado,Cor).</string>
-    <string name="link_web_freepik" translatable="false"><div>Chrono Pass utiliza icones feitos por <a href="https://www.freepik.com" title="Freepik">Freepik</a> a partir de <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></string>
-    <string name="cb_add_color">Adicionar Cor</string>
 </resources>

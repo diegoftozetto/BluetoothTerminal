@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import com.example.chronopassbluetoothterminal.R;
 import com.example.chronopassbluetoothterminal.database.DatabaseHelper;
 import com.example.chronopassbluetoothterminal.model.Command;
+import com.example.chronopassbluetoothterminal.model.Terminal;
 import com.example.chronopassbluetoothterminal.utils.AppConstant;
 import com.example.chronopassbluetoothterminal.utils.SharedPreferenceHelper;
 import com.example.chronopassbluetoothterminal.view.NavigationDrawerActivity;
@@ -38,19 +39,23 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
 
     private final String delimiter;
 
+    private DatabaseHelper db;
+
     public TerminalController(TerminalActivity objTF) {
         this.objTF = objTF;
         setBluetoothCallbacks();
 
         this.configurationsList = new ArrayList<>();
 
-        DatabaseHelper db = new DatabaseHelper(objTF);
+        this.db = new DatabaseHelper(objTF);
         this.configurationsList.addAll(db.getAllConfigurations());
 
         loadSpinner();
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(objTF, R.layout.style_spinner, this.spinnerArray);
         mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.objTF.spCommands.setAdapter(mAdapter);
+
+        loadTerminal();
 
         this.delimiter = SharedPreferenceHelper.getSharedPreferenceString(objTF, AppConstant.KEY_DELIMITER_SEND, AppConstant.KEY_DELIMITER_DEFAULT);
     }
@@ -70,18 +75,44 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
         }
     }
 
+    private void loadTerminal() {
+        List<Terminal> terminalList = this.db.getAllTextTerminalDeviceAddress(objTF.device.getAddress());
+
+        for (Terminal t : terminalList) {
+            addTextToTerminal(t.getType(), t.getText(), t.getTimestamp());
+        }
+    }
+
+    public void cleanTerminal() {
+        this.db.deleteTextTerminal(objTF.device.getAddress());
+        objTF.tvMessages.setText("");
+    }
+
     public void onMessageSend(String msg) {
         int position = objTF.spCommands.getSelectedItemPosition();
         if (position == 0) objTF.etMsg.setText("");
 
         objTF.bluetooth.send(msg + delimiter);
-        appendToChat(">", msg, Color.YELLOW);
+        addTextToTerminal(1, msg);
     }
 
-    public void appendToChat(String symbol, String msg, int color) {
+    public void addTextToTerminal(int type, String msg, String hour) {
+        appendToTerminal(type, msg, hour);
+    }
+
+    public void addTextToTerminal(int type, String msg) {
+        appendToTerminal(type, msg, getHour());
+        this.db.insertTerminal(objTF.device.getAddress(), getHour(), msg, type);
+    }
+
+    private void appendToTerminal(int type, String msg, String hour) {
+        String symbol = (type == 0) ? AppConstant.SYMBOL_TERMINAL_SYSTEM : ((type == 1) ?
+                AppConstant.SYMBOL_TERMINAL_SEND : AppConstant.SYMBOL_TERMINAL_RECEIVE);
+        int color = (type == 0) ? Color.WHITE : ((type == 1) ? Color.YELLOW : Color.GREEN);
+
         objTF.tvMessages.append("\n");
         int start = objTF.tvMessages.getText().length();
-        String text = symbol + " " + getHour() + " " + msg;
+        String text = symbol + " " + hour + " " + msg;
         objTF.tvMessages.append(text);
         int end = objTF.tvMessages.getText().length();
         Spannable spannableText = (Spannable) objTF.tvMessages.getText();
@@ -98,7 +129,7 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
         public void onDeviceConnected(BluetoothDevice device) {
             String msg = objTF.getString(R.string.tv_messages_connected) + "\n" +
                     device.getName() + " (" + device.getAddress() + ")";
-            appendToChat("$", msg, Color.WHITE);
+            addTextToTerminal(0, msg);
 
             objTF.btSend.setEnabled(true);
 
@@ -109,7 +140,7 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
         @Override
         public void onDeviceDisconnected(BluetoothDevice device, String message) {
             String msg = objTF.getString(R.string.tv_messages_disconnected);
-            appendToChat("$", msg, Color.WHITE);
+            addTextToTerminal(0, msg);
 
             objTF.btSend.setEnabled(false);
             objTF.etMsg.setEnabled(false);
@@ -123,7 +154,7 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
             String str = new String(message);
 
             String msg = objTF.getString(R.string.tv_messages_command_received) + "\n" + str;
-            appendToChat("<", msg, Color.GREEN);
+            addTextToTerminal(2, msg);
         }
 
         @Override
@@ -135,7 +166,7 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
         public void onConnectError(final BluetoothDevice device, String message) {
             String msg = objTF.getString(R.string.tv_messages_no_connected);
 
-            appendToChat("$", msg, Color.WHITE);
+            addTextToTerminal(0, msg);
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 if (objTF.bluetooth.isEnabled())
                     objTF.bluetooth.connectToDevice(device);

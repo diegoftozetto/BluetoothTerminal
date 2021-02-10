@@ -2,7 +2,6 @@ package com.example.chronopassbluetoothterminal.view;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
@@ -77,7 +76,7 @@ public class TerminalActivity extends AppCompatActivity {
             bluetooth.connectToDevice(device);
 
             String msg = getString(R.string.tv_messages_connecting);
-            this.objTC.appendToChat("$", msg, Color.WHITE);
+            this.objTC.addTextToTerminal(0, msg);
         } else {
             Intent intent = new Intent(this, NavigationDrawerActivity.class);
             this.startActivity(intent);
@@ -111,8 +110,10 @@ public class TerminalActivity extends AppCompatActivity {
             finish();
         } else if (item.getItemId() == R.id.ic_menu_connect) {
             bluetooth.connectToDevice(device);
-
             this.menu.findItem(R.id.ic_menu_connect).setVisible(false);
+        } else if (item.getItemId() == R.id.ic_menu_delete) {
+            this.objTC.cleanTerminal();
+            tvMessages.setText("");
         }
         return true;
     }
