@@ -222,7 +222,7 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
             String value = configurationsList.get(position - 1).getValue();
             int color = configurationsList.get(position - 1).getColor();
 
-            String colorStr = (color != -1) ? (AppConstant.KEY_SEPARATOR_DEFAULT + Integer.toHexString(color)) : "";
+            String colorStr = (color != AppConstant.COLOR_DEFAULT) ? (AppConstant.KEY_SEPARATOR_DEFAULT + (Integer.toHexString(color).substring(2))) : "";
             String text = value + colorStr;
 
             objTF.etMsg.setText(text);

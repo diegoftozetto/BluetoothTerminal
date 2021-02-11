@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.chronopassbluetoothterminal.R;
 import com.example.chronopassbluetoothterminal.database.DatabaseHelper;
 import com.example.chronopassbluetoothterminal.model.Command;
+import com.example.chronopassbluetoothterminal.utils.AppConstant;
 import com.example.chronopassbluetoothterminal.utils.CommandsAdapter;
 import com.example.chronopassbluetoothterminal.utils.RecyclerTouchListener;
 import com.example.chronopassbluetoothterminal.view.ui.CommandsFragment;
@@ -38,14 +39,14 @@ public class CommandsController {
     private final List<Command> configurationsList;
     private final DatabaseHelper db;
 
-    private int selectedColorPicker;
+    private String selectedColorPicker;
 
     public CommandsController(CommandsFragment objCF, Context context) {
         this.objCF = objCF;
         this.context = context;
 
         this.configurationsList = new ArrayList<>();
-        this.selectedColorPicker = -1;
+        this.selectedColorPicker = null;
 
         this.db = new DatabaseHelper(context);
         this.configurationsList.addAll(db.getAllConfigurations());
@@ -122,13 +123,12 @@ public class CommandsController {
                         .setAllowCustom(true)
                         .setAllowPresets(true)
                         .setColor(Color.BLUE)
-                        .setShowAlphaSlider(true)
                         .create();
 
                 colorPickerDialog.setColorPickerDialogListener(new ColorPickerDialogListener() {
                     @Override
                     public void onColorSelected(int dialogId, int color) {
-                        selectedColorPicker = color;
+                        selectedColorPicker = String.valueOf(color);
                         tvCommandColor.setBackgroundColor(color);
                     }
 
@@ -144,7 +144,7 @@ public class CommandsController {
             etConfigName.setText(config.getName());
             etConfigValue.setText(config.getValue());
 
-            if (config.getColor() != -1) {
+            if (config.getColor() != AppConstant.COLOR_DEFAULT) {
                 cbCommandColor.setChecked(true);
                 tvCommandColor.setBackgroundColor(config.getColor());
             }
@@ -169,12 +169,13 @@ public class CommandsController {
                 boolean result;
                 String message;
 
-                int selectedColor = -1;
+                int selectedColor = AppConstant.COLOR_DEFAULT;
                 if (cbCommandColor.isChecked()) {
-                    if (selectedColorPicker == -1)
+                    if (selectedColorPicker != null) {
+                        selectedColor = Integer.parseInt(selectedColorPicker);
+                    } else {
                         selectedColor = context.getResources().getColor(R.color.colorPickerDefault);
-                    else
-                        selectedColor = selectedColorPicker;
+                    }
                 }
 
                 if (shouldUpdate && config != null) {

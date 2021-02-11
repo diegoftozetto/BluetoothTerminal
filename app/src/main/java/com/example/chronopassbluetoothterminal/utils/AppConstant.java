@@ -13,5 +13,7 @@ public class AppConstant {
     public static final String SYMBOL_TERMINAL_SEND = ">";
     public static final String SYMBOL_TERMINAL_RECEIVE = "<";
 
+    public static final int COLOR_DEFAULT = 123456789;
+
     public static String CURRENT_DELIMITER_RECEIVE = null;
 }

@@ -1,6 +1,7 @@
 package com.example.chronopassbluetoothterminal.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ public class CommandsAdapter extends RecyclerView.Adapter<CommandsAdapter.MyView
     private List<Command> configurationsList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView dot;
         public TextView name;
         public TextView value;
 
@@ -26,6 +28,7 @@ public class CommandsAdapter extends RecyclerView.Adapter<CommandsAdapter.MyView
             super(view);
             this.name = view.findViewById(R.id.tv_name);
             this.value = view.findViewById(R.id.tv_value);
+            this.dot = view.findViewById(R.id.tv_dot);
         }
     }
 
@@ -49,7 +52,13 @@ public class CommandsAdapter extends RecyclerView.Adapter<CommandsAdapter.MyView
         holder.name.setText(config.getName());
 
         int color = config.getColor();
-        String colorStr = (color != -1) ? (AppConstant.KEY_SEPARATOR_DEFAULT + Integer.toHexString(color)) : "";
+        String colorStr = "";
+        if (color != AppConstant.COLOR_DEFAULT) {
+            colorStr = AppConstant.KEY_SEPARATOR_DEFAULT + (Integer.toHexString(color)).substring(2);
+            holder.dot.setBackgroundColor(color);
+        } else {
+            holder.dot.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+        }
 
         String text = config.getValue() + colorStr;
         holder.value.setText(text);
