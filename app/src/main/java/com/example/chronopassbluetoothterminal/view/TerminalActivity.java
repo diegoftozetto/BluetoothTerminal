@@ -86,8 +86,9 @@ public class TerminalActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        if (bluetooth.isConnected())
+        if (bluetooth.isConnected()) {
             bluetooth.disconnect();
+        }
 
         bluetooth.onStop();
     }
@@ -106,15 +107,29 @@ public class TerminalActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
+            removeCallbacks();
             startActivity(new Intent(this, NavigationDrawerActivity.class));
             finish();
         } else if (item.getItemId() == R.id.ic_menu_connect) {
             bluetooth.connectToDevice(device);
             this.menu.findItem(R.id.ic_menu_connect).setVisible(false);
-        } else if (item.getItemId() == R.id.ic_menu_delete) {
+        } else if (item.getItemId() == R.id.ic_menu_clean_terminal) {
             this.objTC.cleanTerminal();
             tvMessages.setText("");
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        removeCallbacks();
+    }
+
+    private void removeCallbacks() {
+        if (!bluetooth.isConnected()) {
+            bluetooth.removeDeviceCallback();
+            bluetooth.removeBluetoothCallback();
+        }
     }
 }

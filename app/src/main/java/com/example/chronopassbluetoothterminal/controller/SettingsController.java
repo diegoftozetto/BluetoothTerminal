@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.chronopassbluetoothterminal.R;
+import com.example.chronopassbluetoothterminal.database.DatabaseHelper;
 import com.example.chronopassbluetoothterminal.model.Settings;
 import com.example.chronopassbluetoothterminal.utils.AppConstant;
 import com.example.chronopassbluetoothterminal.utils.RecyclerTouchListener;
@@ -33,18 +34,24 @@ public class SettingsController {
 
     private List<Settings> settingsList;
 
+    private final DatabaseHelper db;
+
     public SettingsController(SettingsFragment objSF, Context context) {
         this.objSF = objSF;
         this.context = context;
 
+        this.db = new DatabaseHelper(context);
         this.settingsList = new ArrayList<>();
 
         Settings delimiter = new Settings(context.getString(R.string.settings_delimiter),
                 context.getString(R.string.settings_delimiter_description), R.drawable.ic_seetings_delimiter);
+        Settings cleanTerminal = new Settings(context.getString(R.string.settings_clean_terminal),
+                context.getString(R.string.settings_all_terminals_description), R.drawable.ic_clean_terminal);
         Settings about = new Settings(context.getString(R.string.settings_about),
                 context.getString(R.string.settings_about_description), R.drawable.ic_settings_about);
 
         this.settingsList.add(delimiter);
+        this.settingsList.add(cleanTerminal);
         this.settingsList.add(about);
 
         initRecyclerView();
@@ -63,6 +70,9 @@ public class SettingsController {
             public void onClick(View view, final int position) {
                 if (position == 0) {
                     showEditDelimiterDialog();
+                } else if (position == 1) {
+                    db.deleteAllTextTerminal();
+                    Toast.makeText(context, context.getString(R.string.settings_all_terminals_clean), Toast.LENGTH_LONG).show();
                 } else {
                     showAboutDialog();
                 }

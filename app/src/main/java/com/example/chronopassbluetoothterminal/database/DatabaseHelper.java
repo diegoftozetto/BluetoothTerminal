@@ -189,4 +189,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{deviceAddress});
         db.close();
     }
+
+    public void deleteAllTextTerminal() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(Terminal.TABLE_NAME, null,
+                null);
+        db.close();
+    }
 }

@@ -54,6 +54,7 @@
     <string name="delimiter_send">Delimiter (Send)</string>
     <string name="delimiter_receive">Delimiter (Receive)</string>
     <string name="link_web_freepik"><div>Chrono Pass uses icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></string>
+    <string name="settings_about_copyright">Copyright© 2021 <b>VIDO.LA</b>. All rights reserved.</string>
     <!-- Terminal -->
     <string name="title_terminal">Terminal</string>
     <string name="tv_messages_connecting">Connecting…</string>
@@ -64,7 +65,10 @@
     <string name="sp_item_terminal">Manual Control</string>
     <string name="title_activity_terminal" translatable="false">Terminal</string>
     <string name="menu_connect">Device Connect</string>
-    <string name="menu_delete">Clean Terminal</string>
+    <string name="menu_clean">Clean Terminal</string>
+    <string name="settings_clean_terminal">Clean Terminals</string>
+    <string name="settings_all_terminals_description">All terminals will be deleted from the system.</string>
+    <string name="settings_all_terminals_clean">All terminals clean!</string>
     <!-- Others -->
     <string name="positive_button_save">Save</string>
     <string name="positive_button_update">Update</string>

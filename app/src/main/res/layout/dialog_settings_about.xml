@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,10 +24,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="32dp"
         android:text="@string/app_name"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="normal"
-        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_about"
         app:layout_constraintTop_toTopOf="@+id/iv_about" />
@@ -40,9 +39,9 @@
         android:layout_marginStart="@dimen/_16dp"
         android:layout_marginEnd="@dimen/_32dp"
         android:text="@string/app_version"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:typeface="normal"
-        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_about"
         app:layout_constraintTop_toBottomOf="@+id/tv_about_name" />
@@ -69,14 +68,28 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
         android:autoLink="web"
         android:text="@string/link_web_freepik"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_about_description" />
+
+    <TextView
+        android:id="@+id/tv_about_copyright"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/settings_about_copyright"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_about_description"
+        app:layout_constraintTop_toBottomOf="@+id/tv_about_freepik"
         app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
