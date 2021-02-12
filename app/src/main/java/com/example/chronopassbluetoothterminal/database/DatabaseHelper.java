@@ -30,6 +30,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion == 1) {
+            db.execSQL("ALTER TABLE " + Command.TABLE_NAME + " ADD COLUMN "
+                    + Command.COLUMN_MATRIX_LED + " TEXT");
             db.execSQL(Terminal.CREATE_TABLE);
         } else {
             onCreate(db);
@@ -39,13 +41,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * TB_COMMAND
      */
-    public long insertConfiguration(String name, String value, int color) {
+    public long insertCommand(String name, String value, String matrixLed, int color) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
         values.put(Command.COLUMN_NAME, name);
         values.put(Command.COLUMN_VALUE, value);
+        values.put(Command.COLUMN_MATRIX_LED, matrixLed);
         values.put(Command.COLUMN_COLOR, color);
 
         long id = db.insert(Command.TABLE_NAME, null, values);
@@ -54,30 +57,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public Command getConfiguration(long id) {
+    public Command getCommand(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(Command.TABLE_NAME,
-                new String[]{Command.COLUMN_ID, Command.COLUMN_NAME, Command.COLUMN_VALUE, Command.COLUMN_COLOR, Command.COLUMN_TIMESTAMP},
+                new String[]{Command.COLUMN_ID, Command.COLUMN_NAME, Command.COLUMN_VALUE, Command.COLUMN_MATRIX_LED, Command.COLUMN_COLOR, Command.COLUMN_TIMESTAMP},
                 Command.COLUMN_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
 
         if (cursor != null)
             cursor.moveToFirst();
 
-        Command config = new Command(
+        Command command = new Command(
                 cursor.getLong(cursor.getColumnIndex(Command.COLUMN_ID)),
                 cursor.getString(cursor.getColumnIndex(Command.COLUMN_NAME)),
                 cursor.getString(cursor.getColumnIndex(Command.COLUMN_VALUE)),
+                cursor.getString(cursor.getColumnIndex(Command.COLUMN_MATRIX_LED)),
                 cursor.getInt(cursor.getColumnIndex(Command.COLUMN_COLOR)),
                 cursor.getString(cursor.getColumnIndex(Command.COLUMN_TIMESTAMP)));
 
         cursor.close();
 
-        return config;
+        return command;
     }
 
-    public List<Command> getAllConfigurations() {
+    public List<Command> getAllCommands() {
         List<Command> configurations = new ArrayList<>();
 
         String selectQuery = "SELECT  * FROM " + Command.TABLE_NAME + " ORDER BY " +
@@ -88,14 +92,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Command config = new Command();
-                config.setId(cursor.getInt(cursor.getColumnIndex(Command.COLUMN_ID)));
-                config.setName(cursor.getString(cursor.getColumnIndex(Command.COLUMN_NAME)));
-                config.setValue(cursor.getString(cursor.getColumnIndex(Command.COLUMN_VALUE)));
-                config.setColor(cursor.getInt(cursor.getColumnIndex(Command.COLUMN_COLOR)));
-                config.setTimestamp(cursor.getString(cursor.getColumnIndex(Command.COLUMN_TIMESTAMP)));
+                Command command = new Command();
+                command.setId(cursor.getInt(cursor.getColumnIndex(Command.COLUMN_ID)));
+                command.setName(cursor.getString(cursor.getColumnIndex(Command.COLUMN_NAME)));
+                command.setValue(cursor.getString(cursor.getColumnIndex(Command.COLUMN_VALUE)));
+                command.setMatrixLed(cursor.getString(cursor.getColumnIndex(Command.COLUMN_MATRIX_LED)));
+                command.setColor(cursor.getInt(cursor.getColumnIndex(Command.COLUMN_COLOR)));
+                command.setTimestamp(cursor.getString(cursor.getColumnIndex(Command.COLUMN_TIMESTAMP)));
 
-                configurations.add(config);
+                configurations.add(command);
             } while (cursor.moveToNext());
         }
 
@@ -103,7 +108,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return configurations;
     }
 
-    public int getConfigurationsCount() {
+    public int getCommandsCount() {
         String countQuery = "SELECT  * FROM " + Command.TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
@@ -114,24 +119,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    public boolean updateConfiguration(Command config) {
+    public boolean updateCommand(Command command) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(Command.COLUMN_NAME, config.getName());
-        values.put(Command.COLUMN_VALUE, config.getValue());
-        values.put(Command.COLUMN_COLOR, config.getColor());
+        values.put(Command.COLUMN_NAME, command.getName());
+        values.put(Command.COLUMN_VALUE, command.getValue());
+        values.put(Command.COLUMN_MATRIX_LED, command.getMatrixLed());
+        values.put(Command.COLUMN_COLOR, command.getColor());
 
         int ret = db.update(Command.TABLE_NAME, values, Command.COLUMN_ID + " = ?",
-                new String[]{String.valueOf(config.getId())});
+                new String[]{String.valueOf(command.getId())});
 
-        if (ret == 0)
-            return false;
-
-        return true;
+        return ret != 0;
     }
 
-    public void deleteConfiguration(Command config) {
+    public void deleteCommand(Command config) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(Command.TABLE_NAME, Command.COLUMN_ID + " = ?",
                 new String[]{String.valueOf(config.getId())});

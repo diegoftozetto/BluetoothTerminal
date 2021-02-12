@@ -33,7 +33,7 @@
     <string name="toast_command_added_successfully">Command added successfully!!!</string>
     <string name="toast_command_updated_successfully">Command updated successfully!!!</string>
     <string name="toast_error_adding_command_configuration">Error when adding command configuration.</string>
-    <string name="toast_type_fields_correctly">Please. Type the fields correctly.</string>
+    <string name="toast_type_fields_correctly">Please, type the fields correctly.</string>
     <string name="toast_command_removed_successfully">Command removed successfully!</string>
     <string name="alert_dialog_title_new_command">New Command</string>
     <string name="alert_dialog_title_update_command">Update Command</string>
@@ -41,11 +41,16 @@
     <string name="choose_option_edit">Edit</string>
     <string name="choose_option_delete">Delete</string>
     <string name="toast_selected_color">The color will be added in sequence to the typed command (Ex: Typed Command, Color).</string>
-    <string name="cb_add_color">Add Cor</string>
+    <string name="cb_matrix_led">Add Matrix LEDs</string>
+    <string name="choose_color">Choose Color</string>
+    <string name="alert_dialog_title_matrix_led">Matrix LEDs</string>
+    <string name="no_command_informed">No Command Informed.</string>
+    <string name="tv_command_result">Command Result:</string>
+    <string name="et_result_matrix">Result of the LED matrix</string>
     <!-- Settings -->
     <string name="hint_type_delimiter">Delimiter Character</string>
     <string name="toast_delimiter_added_successfully">Delimiter added successfully!!!</string>
-    <string name="toast_type_field_correctly">Please. Type the field correctly.</string>
+    <string name="toast_type_field_correctly">Please, type the field correctly.</string>
     <string name="alert_dialog_title_configure_delimiter">Configure Delimiter</string>
     <string name="settings_delimiter">Delimiter</string>
     <string name="settings_delimiter_description">Set delimiter character at the end of the message.</string>

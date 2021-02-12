@@ -29,7 +29,7 @@
     <string name="toast_command_added_successfully">Comando adicionado com sucesso!!!</string>
     <string name="toast_command_updated_successfully">Comando atualizado com sucesso!!!</string>
     <string name="toast_error_adding_command_configuration">Erro ao adicionar configuração do comando.</string>
-    <string name="toast_type_fields_correctly">Por favor. Informe os campos corretamente.</string>
+    <string name="toast_type_fields_correctly">Por favor, informe os campos corretamente.</string>
     <string name="toast_command_removed_successfully">Comando removido com sucesso!</string>
     <string name="alert_dialog_title_new_command">Novo Comando</string>
     <string name="alert_dialog_title_update_command">Atualizar Comando</string>
@@ -37,11 +37,15 @@
     <string name="choose_option_edit">Editar</string>
     <string name="choose_option_delete">Deletar</string>
     <string name="toast_selected_color">A cor será adicionada em sequência ao comando digitado (Ex: Comando Digitado,Cor).</string>
-    <string name="cb_add_color">Adicionar Cor</string>
+    <string name="cb_matrix_led">Add Matriz de LEDs</string>
+    <string name="choose_color">Escolher Cor</string>
+    <string name="no_command_informed">Nenhum Comando Informado.</string>
+    <string name="tv_command_result">Resultado do Comando:</string>
+    <string name="et_result_matrix">Resultado da Matriz de LEDs</string>
     <!-- Settings -->
     <string name="hint_type_delimiter">Caractere Delimitador</string>
     <string name="toast_delimiter_added_successfully">Delimitador adicionado com sucesso!!!</string>
-    <string name="toast_type_field_correctly">Por favor. Informe o campo corretamente.</string>
+    <string name="toast_type_field_correctly">Por favor, informe o campo corretamente.</string>
     <string name="alert_dialog_title_configure_delimiter">Configurar Delimitador</string>
     <string name="settings_delimiter">Delimitador</string>
     <string name="settings_delimiter_description">Configurar caractere delimitador do fim da mensagem.</string>
@@ -50,6 +54,8 @@
     <string name="delimiter_send">Delimitador (Envio)</string>
     <string name="delimiter_receive">Delimitador (Recebimento)</string>
     <string name="link_web_freepik"><div>Chrono Pass utiliza icones feitos por <a href="https://www.freepik.com" title="Freepik">Freepik</a> a partir de <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></string>
+    <string name="settings_about_copyright">Copyright© 2021 <b>VIDO.LA</b>. Todos os direitos reservados.</string>
+    <string name="alert_dialog_title_matrix_led">Matriz de LEDs</string>
     <!-- Terminal -->
     <string name="title_terminal">Terminal</string>
     <string name="sp_item_terminal">Comando Manual</string>
@@ -61,11 +67,10 @@
     <string name="menu_connect">Conectar Dispositivo</string>
     <string name="menu_clean">Limpar Terminal</string>
     <string name="settings_clean_terminal">Limpar Terminais</string>
-    <string name="settings_all_terminals_clean">Todos os terminais limpos!</string>
+    <string name="settings_all_terminals_clean">Todos os terminais foram limpos!</string>
     <string name="settings_all_terminals_description">Todos os terminais serão apagados do sistema.</string>
     <!-- Others -->
     <string name="positive_button_save">Salvar</string>
     <string name="positive_button_update">Atualizar</string>
     <string name="negative_button_cancel">Cancelar</string>
-    <string name="settings_about_copyright">Copyright© 2021 <b>VIDO.LA</b>. Todos os direitos reservados.</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.chronopassbluetoothterminal.controller;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
@@ -9,8 +10,10 @@ import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 import com.example.chronopassbluetoothterminal.R;
 import com.example.chronopassbluetoothterminal.database.DatabaseHelper;
@@ -48,7 +51,7 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
         this.configurationsList = new ArrayList<>();
 
         this.db = new DatabaseHelper(objTF);
-        this.configurationsList.addAll(db.getAllConfigurations());
+        this.configurationsList.addAll(db.getAllCommands());
 
         loadSpinner();
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(objTF, R.layout.style_spinner, this.spinnerArray);
@@ -216,13 +219,21 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
         if (position == 0) {
             objTF.etMsg.setEnabled(objTF.bluetooth.isConnected());
             objTF.etMsg.setText("");
+
+            objTF.etMsg.setFocusableInTouchMode(true);
         } else {
-            objTF.etMsg.setEnabled(false);
+            hideSoftKeyboard(objTF.etMsg);
+            objTF.etMsg.setFocusableInTouchMode(false);
+            objTF.etMsg.clearFocus();
 
             String value = configurationsList.get(position - 1).getValue();
+            String matrixLed = configurationsList.get(position - 1).getMatrixLed();
             int color = configurationsList.get(position - 1).getColor();
 
-            String colorStr = (color != AppConstant.COLOR_DEFAULT) ? (AppConstant.KEY_SEPARATOR_DEFAULT + (Integer.toHexString(color).substring(2))) : "";
+
+            String colorStr = (matrixLed != null) ?
+                    (AppConstant.KEY_SEPARATOR_DEFAULT + matrixLed + AppConstant.KEY_SEPARATOR_DEFAULT + (Integer.toHexString(color).substring(2))) :
+                    "";
             String text = value + colorStr;
 
             objTF.etMsg.setText(text);
@@ -232,5 +243,10 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    protected void hideSoftKeyboard(EditText input) {
+        InputMethodManager imm = (InputMethodManager) objTF.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
     }
 }

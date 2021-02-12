@@ -18,4 +18,5 @@
     <color name="color_alto">#D8D8D8</color>
     <color name="color_terminal">#F01B192C</color>
     <color name="colorPickerDefault">#FF0000FF</color>
+    <color name="color_matrix_default">#A1A1A1</color>
 </resources>

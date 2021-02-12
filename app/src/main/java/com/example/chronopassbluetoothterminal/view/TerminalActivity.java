@@ -49,7 +49,6 @@ public class TerminalActivity extends AppCompatActivity {
 
     private void init() {
         this.etMsg = findViewById(R.id.et_msg);
-        this.etMsg.setEnabled(false);
 
         this.btSend = findViewById(R.id.bt_send);
         this.btSend.setEnabled(false);
