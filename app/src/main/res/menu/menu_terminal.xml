@@ -3,8 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/ic_menu_clean_terminal"
-        android:icon="@drawable/ic_clean_terminal"
         android:title="@string/menu_clean"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/ic_menu_disconnect"
+        android:icon="@drawable/ic_menu_disconnect"
+        android:title="@string/menu_disconnect"
         app:showAsAction="ifRoom" />
 
     <item
@@ -12,4 +17,12 @@
         android:icon="@drawable/ic_menu_connect"
         android:title="@string/menu_connect"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/ic_menu_copy"
+        android:title="@string/menu_copy_terminal" />
+
+    <item
+        android:id="@+id/ic_menu_save_log"
+        android:title="@string/menu_save_log" />
 </menu>

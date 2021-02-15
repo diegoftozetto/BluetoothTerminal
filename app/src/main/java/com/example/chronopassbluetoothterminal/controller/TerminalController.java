@@ -4,16 +4,18 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.Spannable;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.chronopassbluetoothterminal.R;
 import com.example.chronopassbluetoothterminal.database.DatabaseHelper;
@@ -24,6 +26,9 @@ import com.example.chronopassbluetoothterminal.utils.SharedPreferenceHelper;
 import com.example.chronopassbluetoothterminal.view.NavigationDrawerActivity;
 import com.example.chronopassbluetoothterminal.view.TerminalActivity;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -127,6 +132,10 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
         return dateFormat.format(new Date());
     }
 
+    public String getCurrentTimeStamp() {
+        return new SimpleDateFormat("yyyy-MM-dd.HH:mm:ss").format(new Date());
+    }
+
     private final DeviceCallback deviceCallback = new DeviceCallback() {
         @Override
         public void onDeviceConnected(BluetoothDevice device) {
@@ -136,8 +145,12 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
 
             objTF.btSend.setEnabled(true);
 
-            if (objTF.spCommands.getSelectedItemPosition() == 0)
+            if (objTF.spCommands.getSelectedItemPosition() == 0) {
                 objTF.etMsg.setEnabled(true);
+            }
+
+            objTF.menu.findItem(R.id.ic_menu_connect).setVisible(false);
+            objTF.menu.findItem(R.id.ic_menu_disconnect).setVisible(true);
         }
 
         @Override
@@ -148,8 +161,8 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
             objTF.btSend.setEnabled(false);
             objTF.etMsg.setEnabled(false);
 
-            MenuItem item = objTF.menu.findItem(R.id.ic_menu_connect);
-            item.setVisible(true);
+            objTF.menu.findItem(R.id.ic_menu_connect).setVisible(true);
+            objTF.menu.findItem(R.id.ic_menu_disconnect).setVisible(false);
         }
 
         @Override
@@ -170,10 +183,14 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
             String msg = objTF.getString(R.string.tv_messages_no_connected);
 
             addTextToTerminal(0, msg);
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                if (objTF.bluetooth.isEnabled())
-                    objTF.bluetooth.connectToDevice(device);
-            }, 3000);
+
+            objTF.menu.findItem(R.id.ic_menu_connect).setVisible(true);
+            objTF.menu.findItem(R.id.ic_menu_disconnect).setVisible(false);
+
+//            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+//                if (objTF.bluetooth.isEnabled())
+//                    objTF.bluetooth.connectToDevice(device);
+//            }, 3000);
         }
     };
 
@@ -221,9 +238,11 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
             objTF.etMsg.setText("");
 
             objTF.etMsg.setFocusableInTouchMode(true);
+            objTF.etMsg.setLongClickable(true);
         } else {
             hideSoftKeyboard(objTF.etMsg);
             objTF.etMsg.setFocusableInTouchMode(false);
+            objTF.etMsg.setLongClickable(false);
             objTF.etMsg.clearFocus();
 
             String value = configurationsList.get(position - 1).getValue();
@@ -248,5 +267,28 @@ public class TerminalController implements View.OnClickListener, AdapterView.OnI
     protected void hideSoftKeyboard(EditText input) {
         InputMethodManager imm = (InputMethodManager) objTF.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+    }
+
+    public void saveLog() {
+        String fileName = "log" + objTF.getString(R.string.app_name).replace(" ", "") + "_" + objTF.device.getAddress() + "_" + getCurrentTimeStamp() + ".txt";
+        String text = objTF.tvMessages.getText().toString().trim();
+        if (!TextUtils.isEmpty(text)) {
+            try {
+                File root = new File(Environment.getExternalStorageDirectory(), "");
+                if (!root.exists()) {
+                    root.mkdirs();
+                }
+                FileWriter writer = new FileWriter(new File(root, fileName));
+                writer.append(text);
+                writer.flush();
+                writer.close();
+
+                Toast.makeText(objTF, objTF.getString(R.string.toast_log_saved_successfully), Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                Toast.makeText(objTF, objTF.getString(R.string.toast_log_error), Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(objTF, objTF.getString(R.string.toast_log_error), Toast.LENGTH_SHORT).show();
+        }
     }
 }

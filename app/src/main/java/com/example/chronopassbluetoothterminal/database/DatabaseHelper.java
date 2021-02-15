@@ -33,6 +33,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + Command.TABLE_NAME + " ADD COLUMN "
                     + Command.COLUMN_MATRIX_LED + " TEXT");
             db.execSQL(Terminal.CREATE_TABLE);
+        } else if (oldVersion == 2) {
+            //Nothing
         } else {
             onCreate(db);
         }

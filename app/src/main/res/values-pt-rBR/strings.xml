@@ -62,13 +62,19 @@
     <string name="tv_messages_connecting">Conectando…</string>
     <string name="tv_messages_connected">Conectado Com:</string>
     <string name="tv_messages_disconnected">Dispositivo Desconectado!</string>
-    <string name="tv_messages_no_connected">Não foi possível conectar, próxima tentativa em 3 segundos…</string>
+    <string name="tv_messages_no_connected">Não foi possível conectar, verifique o dispositivo pareado…</string>
     <string name="tv_messages_command_received">Comando Recebido:</string>
     <string name="menu_connect">Conectar Dispositivo</string>
     <string name="menu_clean">Limpar Terminal</string>
     <string name="settings_clean_terminal">Limpar Terminais</string>
     <string name="settings_all_terminals_clean">Todos os terminais foram limpos!</string>
     <string name="settings_all_terminals_description">Todos os terminais serão apagados do sistema.</string>
+    <string name="menu_disconnect">Desconectar Dispositivo</string>
+    <string name="menu_copy_terminal">Copiar Terminal</string>
+    <string name="toast_terminal_copied">Terminal copiado!</string>
+    <string name="menu_save_log">Salvar Log</string>
+    <string name="toast_log_saved_successfully">Arquivo log salvo com sucesso!</string>
+    <string name="toast_log_error">Error ao salvar arquivo log.</string>
     <!-- Others -->
     <string name="positive_button_save">Salvar</string>
     <string name="positive_button_update">Atualizar</string>

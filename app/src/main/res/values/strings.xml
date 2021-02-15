@@ -66,7 +66,7 @@
     <string name="tv_messages_connected">Connected With:</string>
     <string name="tv_messages_command_received">Command Received:</string>
     <string name="tv_messages_disconnected">Device Disconnected!</string>
-    <string name="tv_messages_no_connected">Could not connect, next try in 3 sec…</string>
+    <string name="tv_messages_no_connected">Could not connect, check the paired device…</string>
     <string name="sp_item_terminal">Manual Control</string>
     <string name="title_activity_terminal" translatable="false">Terminal</string>
     <string name="menu_connect">Device Connect</string>
@@ -74,9 +74,15 @@
     <string name="settings_clean_terminal">Clean Terminals</string>
     <string name="settings_all_terminals_description">All terminals will be deleted from the system.</string>
     <string name="settings_all_terminals_clean">All terminals clean!</string>
+    <string name="menu_disconnect">Disconnect Device</string>
+    <string name="menu_copy_terminal">Copy Terminal</string>
+    <string name="toast_terminal_copied">Terminal copied!</string>
+    <string name="toast_log_saved_successfully">Log file saved successfully!</string>
+    <string name="toast_log_error">Error saving log file.</string>
     <!-- Others -->
     <string name="positive_button_save">Save</string>
     <string name="positive_button_update">Update</string>
     <string name="negative_button_cancel">Cancel</string>
     <string name="tv_dot_predefine" translatable="false">•</string>
+    <string name="menu_save_log">Save Log</string>
 </resources>
