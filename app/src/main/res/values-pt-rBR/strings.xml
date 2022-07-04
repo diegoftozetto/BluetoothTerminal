@@ -54,7 +54,7 @@
     <string name="delimiter_send">Delimitador (Envio)</string>
     <string name="delimiter_receive">Delimitador (Recebimento)</string>
     <string name="link_web_freepik"><div>Chrono Pass utiliza icones feitos por <a href="https://www.freepik.com" title="Freepik">Freepik</a> a partir de <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></string>
-    <string name="settings_about_copyright">Copyright© 2021 <b>VIDO.LA</b>. Todos os direitos reservados.</string>
+    <string name="settings_about_copyright">Copyright© 2022 <b>Chrono</b>. Todos os direitos reservados.</string>
     <string name="alert_dialog_title_matrix_led">Matriz de LEDs</string>
     <!-- Terminal -->
     <string name="title_terminal">Terminal</string>
