@@ -59,7 +59,7 @@
     <string name="delimiter_send">Delimiter (Send)</string>
     <string name="delimiter_receive">Delimiter (Receive)</string>
     <string name="link_web_freepik"><div>Chrono Pass uses icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></string>
-    <string name="settings_about_copyright">Copyright© 2021 <b>VIDO.LA</b>. All rights reserved.</string>
+    <string name="settings_about_copyright">Copyright© 2021 <b>Chrono</b>. All rights reserved.</string>
     <!-- Terminal -->
     <string name="title_terminal">Terminal</string>
     <string name="tv_messages_connecting">Connecting…</string>
